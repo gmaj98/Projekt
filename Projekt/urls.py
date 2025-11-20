@@ -17,8 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.views.generic import TemplateView
+from django.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('articles/', include('ski_app.urls')),
     path('', TemplateView.as_view(template_name='index.html')),
 ]

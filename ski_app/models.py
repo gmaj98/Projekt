@@ -72,6 +72,12 @@ class Articles(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles')
     tags = models.ManyToManyField(Tag)
 
+    def full_name(self):
+        return f"{self.title} {self.author}"
+
+    def __str__(self):
+        return self.full_name()
+
 
 class ArticlesComments(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='article_comments')
