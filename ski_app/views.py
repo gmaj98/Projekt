@@ -2,6 +2,13 @@ from django.shortcuts import render, get_object_or_404
 from .models import Articles
 from django.http import JsonResponse
 
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+
+@api_view(['GET'])
+
+
 def articles(request):
     all_articles = Articles.objects.all().order_by("date")
     data = list(all_articles.values())
