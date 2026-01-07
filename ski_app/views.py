@@ -15,32 +15,59 @@ from .serializers import (
     SlopesSerializer
 )
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def users_list(request):
-    users = User.objects.all()
-    serializer = UserSerializer(users, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def ranking_list(request):
-    ranking = Ranking.objects.all()
-    serializer = RankingSerializer(ranking, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        ranking = Ranking.objects.all()
+        serializer = RankingSerializer(ranking, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = RankingSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
 
 
-@api_view(['GET'])
 def tags_list(request):
-    tags = Tag.objects.all()
-    serializer = TagSerializer(tags, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        tags = Tag.objects.all()
+        serializer = TagSerializer(tags, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = TagSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def articles_list(request):
-    articles = Articles.objects.all().order_by('-date')
-    serializer = ArticlesSerializer(articles, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        articles = Articles.objects.all().order_by('-date')
+        serializer = ArticlesSerializer(articles, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = ArticlesSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
 
 
 @api_view(['GET'])
@@ -50,18 +77,32 @@ def article_detail(request, pk):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def article_comments_list(request, article_id):
-    comments = ArticlesComments.objects.filter(article_id=article_id)
-    serializer = ArticlesCommentsSerializer(comments, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        comments = ArticlesComments.objects.filter(article_id=article_id)
+        serializer = ArticlesCommentsSerializer(comments, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = ArticlesCommentsSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def videos_list(request):
-    videos = Video.objects.all().order_by('-date')
-    serializer = VideoSerializer(videos, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        videos = Video.objects.all().order_by('-date')
+        serializer = VideoSerializer(videos, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = VideoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
 
 
 @api_view(['GET'])
@@ -71,15 +112,29 @@ def video_detail(request, pk):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def video_comments_list(request, video_id):
-    comments = VideoComments.objects.filter(video_id=video_id)
-    serializer = VideoCommentsSerializer(comments, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        comments = VideoComments.objects.filter(video_id=video_id)
+        serializer = VideoCommentsSerializer(comments, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = VideoCommentsSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def slopes_list(request):
-    slopes = Slopes.objects.all()
-    serializer = SlopesSerializer(slopes, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        slopes = Slopes.objects.all()
+        serializer = SlopesSerializer(slopes, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = SlopesSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
