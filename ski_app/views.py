@@ -14,8 +14,12 @@ from .serializers import (
     VideoSerializer, VideoCommentsSerializer,
     SlopesSerializer
 )
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.decorators import api_view, permission_classes
+
 
 @api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticatedOrReadOnly])
 def users_list(request):
     if request.method == 'GET':
         users = User.objects.all()
@@ -30,6 +34,7 @@ def users_list(request):
 
 
 @api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticatedOrReadOnly])
 def ranking_list(request):
     if request.method == 'GET':
         ranking = Ranking.objects.all()
@@ -43,6 +48,8 @@ def ranking_list(request):
         return Response(serializer.errors, status=400)
 
 
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticatedOrReadOnly])
 def tags_list(request):
     if request.method == 'GET':
         tags = Tag.objects.all()
@@ -57,6 +64,7 @@ def tags_list(request):
 
 
 @api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticatedOrReadOnly])
 def articles_list(request):
     if request.method == 'GET':
         articles = Articles.objects.all().order_by('-date')
@@ -78,6 +86,7 @@ def article_detail(request, pk):
 
 
 @api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticatedOrReadOnly])
 def article_comments_list(request, article_id):
     if request.method == 'GET':
         comments = ArticlesComments.objects.filter(article_id=article_id)
@@ -92,6 +101,7 @@ def article_comments_list(request, article_id):
 
 
 @api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticatedOrReadOnly])
 def videos_list(request):
     if request.method == 'GET':
         videos = Video.objects.all().order_by('-date')
@@ -113,6 +123,7 @@ def video_detail(request, pk):
 
 
 @api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticatedOrReadOnly])
 def video_comments_list(request, video_id):
     if request.method == 'GET':
         comments = VideoComments.objects.filter(video_id=video_id)
@@ -127,6 +138,7 @@ def video_comments_list(request, video_id):
 
 
 @api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticatedOrReadOnly])
 def slopes_list(request):
     if request.method == 'GET':
         slopes = Slopes.objects.all()
