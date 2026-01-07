@@ -21,6 +21,6 @@ from django.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('ski_app.urls')),
+    path('api/', include('ski_app.urls')),
     path('react', TemplateView.as_view(template_name='index.html')),
 ]
